@@ -58,10 +58,13 @@ Write a function called `inning` that generates a random number of points that a
 
 function inning(inningNumber){
   let points = 0;
-  points = Math.round(Math.random()) + Math.round(Math.random());
+  return function(){
+  points = Math.round(Math.random()*2) + points;
   return points
+  }
 }
-console.log(inning(8))
+const counter = inning();
+console.log(counter())
 
 /* Task 3: finalScore()
 
@@ -79,10 +82,15 @@ finalScore(inning, 9) might return:
 
 function finalScore(inning, inningNumber){
 
-  let newObj = { Home: 11, Away: 5};
+  let newObj = { 'Home': 0, 'Away': 0};
+  for(let i = 0; i < inningNumber; i++){
+    newObj.Home = inning();
+    newObj.Away = inning();
+  }
   return newObj;
 
 }
+console.log(finalScore(counter, 4))
 
 /* Task 4: 
 
@@ -105,8 +113,24 @@ and returns the score at each pont in the game, like so:
 
 Final Score: 6 - 10 */
 
-function scoreboard(inning, inningNumber) {
-  /* CODE HERE */
+function scoreboard(inning, inningNumbers){
+  let homeScore = 0;
+  let awayScore = 0;
+ 
+  for(let i=1; i<=inningNumbers; i++){
+
+     homeScore =  inning();
+     awayScore =  inning();
+     num2 = i;
+    console.log(`Inning ${num2} : ${homeScore} - ${awayScore}`);
+   
+    
+
+  
+  }
+  
+ 
 }
 
+scoreboard(inning(), 9)
 
